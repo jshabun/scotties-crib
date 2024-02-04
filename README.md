@@ -3,7 +3,7 @@
 ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
 
 
-# Scotties Crib
+# Scotties Crib: A Marketplace for UCR students
 ### authors:
 Joshua Shabun: jshab003@ucr.edu
 Peter Lu: plu040@ucr.edu 
@@ -12,4 +12,4 @@ Adrian Franco: afran111@ucr.edu
 Ashley Bautista: abaut047@ucr.edu
 Luke Nguyen lnguy353@ucr.edu
 
-> A marketplace app coming soon
+> A marketplace app coming soon 
