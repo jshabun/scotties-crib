@@ -6,6 +6,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Login from './Login';
 import Signup from './Signup';
 import { globalStyles } from './styles';
+import Profile from './Profile'
 
 const Stack = createStackNavigator();
 
@@ -15,6 +16,9 @@ export default function App() {
       <Stack.Navigator initialRouteName="Login">
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="Signup" component={Signup} />
+
+        <Stack.Screen name="Profile" component={Profile} />
+
       </Stack.Navigator>
     </NavigationContainer>
   );

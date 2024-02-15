@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, TextInput, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { globalStyles } from './styles';
+import { Button } from 'react-native'
 
 export default function Login({ navigation }) {
   const [email, setEmail] = useState('');
@@ -33,8 +34,10 @@ export default function Login({ navigation }) {
         onPress={() => navigation.navigate('Signup')}
         style={globalStyles.linkText}
       >
-        Don't have an account? Sign Up
+        Don't have an account? Sign Up {'\n \n'}
       </Text>
+
+      <Button title="Go to Profile" onPress={() => navigation.navigate('Profile')} />
     </View>
   );
 }
