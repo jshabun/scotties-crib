@@ -9,7 +9,7 @@ export default function Login({ navigation }) {
 
   const handleLogin = () => {
     // Implement login logic here
-    alert('Login not implemented.');
+    alert('You have been hacked!');
   };
 
   return (
@@ -36,8 +36,12 @@ export default function Login({ navigation }) {
       >
         Don't have an account? Sign Up {'\n \n'}
       </Text>
-
-      <Button title="Go to Profile" onPress={() => navigation.navigate('Profile')} />
+      
+      <Text 
+      style={globalStyles.linkText}
+      onPress={() => navigation.navigate('Profile')}
+      >Have a profile? Go to Profile</Text>
+      {/* <Button style={globalStyles.button} title="Go to Profile" onPress={() => navigation.navigate('Profile')} /> */}
     </View>
   );
 }

@@ -5,7 +5,7 @@ export const globalStyles = StyleSheet.create({
       flex: 1,
       justifyContent: 'center',
       padding: 20,
-      backgroundColor: '#f5f5f5',
+      backgroundColor: '#0b2138',
     },
     input: {
       marginBottom: 15,
@@ -27,6 +27,6 @@ export const globalStyles = StyleSheet.create({
       color: '#007BFF',
       marginTop: 15,
       textAlign: 'center',
-      fontSize: 16,
+      fontSize: 16, 
     },
   });
