@@ -18,13 +18,15 @@ export const globalStyles = StyleSheet.create({
     },
     button: {
       marginVertical: 5,
+      color: '#97c4e1',
     },
     buttonText: {
       fontSize: 18,
       color: '#ffffff',
+      textAlign: 'center',
     },
     linkText: {
-      color: '#007BFF',
+      color: '#97c4e1',
       marginTop: 15,
       textAlign: 'center',
       fontSize: 16, 
