@@ -4,7 +4,7 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import LoginScreen from './Login';
-import SignupScreen from './signup';
+import SignupScreen from './Signup';
 import { globalStyles } from './styles';
 import Profile from './Profile'
 
