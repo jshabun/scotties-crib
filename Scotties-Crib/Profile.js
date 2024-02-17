@@ -1,22 +1,37 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { View, TextInput, Text, TouchableOpacity, StyleSheet, Image, StatusBar } from 'react-native';
 import { globalStyles } from './styles';
+import updatedProfileData from './EditProfile'
 
 
-const Profile = () => {
+const Profile = ({ navigation, route }) => {
+  const { updatedProfileData } = route.params;
   return (
     <View style={styles.container}>
+      <View style={styles.bar}>
+        <TouchableOpacity
+        style={styles.editButton}
+        onPress={() => navigation.navigate('EditProfile')}>
+          <Text style={styles.linkText}>Edit</Text>
+
+        </TouchableOpacity>
+      </View>
       <View style={styles.circle}>
         <Image
-          source={require('./freddy.jpg')}
+          source={require('./assets/freddy.jpg')}
           style={styles.image}
           />
         
         </View>
-        <Text style={styles.profileText}>Freddy F.</Text>
+        <Text style={styles.profileText}>{updatedProfileData.name}</Text>
         <Text style={styles.bioText}>Har har har har</Text>
-      
-      
+        <View style={styles.bar}>
+
+        </View>
+        <Text
+      style={globalStyles.linkText}
+      onPress={() => navigation.navigate('Login')}
+      >Back to login</Text>
     </View>
   );
 };
@@ -32,7 +47,12 @@ const styles = StyleSheet.create({
     backgroundColor: '#0b2138',
 
 
-
+  },
+  bar: {
+    padding: 21,
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    width: '100%'
   },
   circle: {
     width: 130,
@@ -57,8 +77,18 @@ const styles = StyleSheet.create({
   },
   bioText: {
     color: 'white',
-    fontSize: 12,
+    fontSize: 16,
     alignSelf: 'flex-start',
+  },
+  linkText: {
+    color: '#97c4e1',
+    marginTop: 17,
+    textAlign: 'center',
+    fontSize: 20, 
+    textDecorationLine: 'underline',
+  },
+  editButton: {
+    padding: 10,
   },
 });
 

@@ -7,6 +7,7 @@ import LoginScreen from './Login';
 import SignupScreen from './Signup';
 import { globalStyles } from './styles';
 import Profile from './Profile'
+import EditProfile from './EditProfile'
 
 const Stack = createStackNavigator();
 
@@ -28,9 +29,18 @@ export default function App() {
               headerShown: false,
             }}
           />
+        <Stack.Screen name="Profile" component={Profile} 
+        options={{
+          headerShown: false,
+        }}
+        />
+
+        <Stack.Screen name="EditProfile" component={EditProfile}
+        options={{
+          headerShown: false,
+        }}/>
 
 
-        <Stack.Screen name="Profile" component={Profile} />
       </Stack.Navigator>
     </NavigationContainer>
   );
