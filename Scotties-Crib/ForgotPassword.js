@@ -3,12 +3,11 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, TouchableOpacity, ScrollView } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { Header, Input } from './components';
-import { colors } from './theme/colors';
+//import { Header, Input } from './components';
 import { moderateScale } from 'react-native-size-matters';
 
 
-export default ForgotPassword = () => {
+export default ForgotPassword = ({navigation, route}) => {
     return (
         <SafeAreaView style={styles.container} forceInset={{ top: "always" }}>
             <StatusBar style="dark" />
@@ -62,7 +61,7 @@ const styles = StyleSheet.create({
         marginTop: "14%"
     },
     passwordStyle: {
-        color: colors.primary,
+        color: '#B4192F',
         fontSize: moderateScale(14),
         fontWeight: "600"
     },
@@ -73,11 +72,11 @@ const styles = StyleSheet.create({
         textAlign: "center"
     },
     link: {
-        color: colors.primary,
+        color: '#0D253C',
         fontWeight: "bold"
     },
     btn: {
-        backgroundColor: colors.primary,
+        backgroundColor: '#B4192F',
         justifyContent: "center",
         alignItems: "center",
         paddingVertical: "5%",
