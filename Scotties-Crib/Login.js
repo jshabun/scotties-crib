@@ -35,6 +35,12 @@ export default function Login({ navigation }) {
       >
         Don't have an account? Sign Up
       </Text>
+      <Text
+        onPress={() => navigation.navigate('ForgotPassword')}
+        style={globalStyles.linkText}
+      >
+        Forgot Password
+      </Text>
     </View>
   );
 }
