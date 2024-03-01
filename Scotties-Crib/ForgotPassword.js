@@ -3,7 +3,8 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, TouchableOpacity, ScrollView } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import { SafeAreaView } from 'react-native-safe-area-context';
-//import { Header, Input } from './components';
+import Input from './PWComponents/Input';
+import Header from './PWComponents/Header';
 import { moderateScale } from 'react-native-size-matters';
 
 
@@ -15,16 +16,16 @@ export default ForgotPassword = ({navigation, route}) => {
                 paddingTop: moderateScale(60)
             }}>
                 <Header
-                    title="Forget Password"
+                    title="Forgot Password"
                     text="Please enter your registered email address to recover your password"
                 />
                 <View style={styles.inputBox}>
                     <Input
                         label="Email"
-                        errorMessage="Enter your valid email  address"
+                        errorMessage="Enter your account email address"
                         containerStyle={styles.inputStyle}
                         right={() =>
-                            <MaterialIcons name="error" size={20} color={colors.error} />
+                            <MaterialIcons name="error" size={20} color={'red'} />
                         }
                     />
                 </View>
@@ -76,7 +77,7 @@ const styles = StyleSheet.create({
         fontWeight: "bold"
     },
     btn: {
-        backgroundColor: '#B4192F',
+        backgroundColor: '#000080',
         justifyContent: "center",
         alignItems: "center",
         paddingVertical: "5%",
