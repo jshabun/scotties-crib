@@ -1,20 +1,27 @@
 import React, { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, TouchableOpacity, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, ScrollView, Alert } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Input from './PWComponents/Input';
 import Header from './PWComponents/Header';
 import { moderateScale } from 'react-native-size-matters';
 
+export default ForgotPassword = ({ navigation, route }) => {
+    const [email, setEmail] = useState('');
 
-export default ForgotPassword = ({navigation, route}) => {
+    const handleSendEmail = () => {
+        if (email) {
+            Alert.alert('Email Sent', 'Password recovery email has been sent to ' + email);
+        } else {
+            Alert.alert('Error', 'Please enter your email address');
+        }
+    };
+
     return (
         <SafeAreaView style={styles.container} forceInset={{ top: "always" }}>
             <StatusBar style="dark" />
-            <ScrollView style={{
-                paddingTop: moderateScale(60)
-            }}>
+            <ScrollView style={{ paddingTop: moderateScale(60) }}>
                 <Header
                     title="Forgot Password"
                     text="Please enter your registered email address to recover your password"
@@ -27,13 +34,15 @@ export default ForgotPassword = ({navigation, route}) => {
                         right={() =>
                             <MaterialIcons name="error" size={20} color={'red'} />
                         }
+                        value={email}
+                        onChangeText={setEmail}
+    
                     />
                 </View>
                 <View style={styles.footer}>
-
                     <TouchableOpacity
                         style={styles.btn}
-                        onPress={() => { }}
+                        onPress={handleSendEmail}
                         activeOpacity={0.7}
                     >
                         <Text style={styles.btnText}>
