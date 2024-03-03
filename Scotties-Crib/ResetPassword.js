@@ -8,7 +8,7 @@ import Header from './PWComponents/Header';
 import { moderateScale } from 'react-native-size-matters';
 
 
-export default CreatePassword = () => {
+export default Reset = () => {
     const [securePassword, setSecurePassword] = useState(true);
 
     return (
@@ -18,7 +18,7 @@ export default CreatePassword = () => {
                 paddingTop: moderateScale(60)
             }}>
                 <Header
-                    title="Reset your password"
+                    title="Create your password"
                     text="Please create your new password"
                 />
                 <View style={styles.inputBox}>
@@ -32,7 +32,7 @@ export default CreatePassword = () => {
                         }
                     />
                     <Input
-                        label="Verify Password"
+                        label="Confirm Password"
                         secureTextEntry={securePassword}
                         autoCapitalize="none"
                         right={() =>

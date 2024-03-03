@@ -3,8 +3,8 @@ import { StyleSheet, Text, View } from 'react-native';
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import Login from './Login';
-import Signup from './Signup';
+import LoginScreen from './Login';
+import SignupScreen from './Signup';
 import { globalStyles } from './styles';
 import ForgotPassword from './ForgotPassword';
 import ResetPassword from './ResetPassword';
@@ -18,19 +18,19 @@ export default function App() {
       <Stack.Navigator initialRouteName="Login">
         <Stack.Screen 
           name="Login" 
-          component={Login}
+          component={LoginScreen}
           options={{
             headerShown: false,   
           }}
         />
         <Stack.Screen
             name="Signup"
-            component={Signup}
+            component={SignupScreen}
             options={{
               headerShown: false,
             }}
           />
-        <Stack.Screen
+          <Stack.Screen
             name="ForgotPassword"
             component={ForgotPassword}
             options={{
