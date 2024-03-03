@@ -44,14 +44,14 @@ const LoginScreen = ({ navigation, route }) => {
         value={password}
         secureTextEntry={true}
       />
-      <TouchableOpacity style={styles.signUpButton} onPress={navigateToForgotPassword}>
-        <Text style={styles.signUpButtonText}>Forgot Password</Text>
-      </TouchableOpacity>
       <TouchableOpacity style={styles.button} onPress={handleLogin}>
         <Text style={styles.buttonText}>Log In</Text>
       </TouchableOpacity>
       <TouchableOpacity style={styles.signUpButton} onPress={navigateToSignUp}>
         <Text style={styles.signUpButtonText}>Sign Up</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.forgotPasswordButton} onPress={navigateToForgotPassword}>
+        <Text style={styles.signUpButtonText}>Forgot Password</Text>
       </TouchableOpacity>
     </View>
   );
@@ -103,6 +103,10 @@ const styles = StyleSheet.create({
     color: '#97c4e1',
     fontSize: 16,
   },
+  forgotPasswordButton: {
+    marginTop: 20,
+    fontSize: 10,
+}
 });
 
 export default LoginScreen;
