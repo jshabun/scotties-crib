@@ -7,6 +7,8 @@ import Login from './Login';
 import Signup from './Signup';
 import { globalStyles } from './styles';
 import ForgotPassword from './ForgotPassword';
+import ResetPassword from './ResetPassword';
+
 
 const Stack = createStackNavigator();
 
@@ -31,6 +33,13 @@ export default function App() {
         <Stack.Screen
             name="ForgotPassword"
             component={ForgotPassword}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen
+            name="ResetPassword"
+            component={ResetPassword}
             options={{
               headerShown: false,
             }}

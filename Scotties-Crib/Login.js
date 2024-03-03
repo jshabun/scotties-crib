@@ -41,6 +41,12 @@ export default function Login({ navigation }) {
       >
         Forgot Password
       </Text>
+      <Text
+        onPress={() => navigation.navigate('ResetPassword')}
+        style={globalStyles.linkText}
+      >
+        Reset Password
+      </Text>
     </View>
   );
 }
