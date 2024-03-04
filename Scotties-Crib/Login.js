@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, TextInput, Text, TouchableOpacity, StatusBar, Image } from 'react-native';
+import { StyleSheet, View, TextInput, Text, TouchableOpacity, StatusBar, Image, Button } from 'react-native';
+import { globalStyles } from './styles';
 
 const LoginScreen = ({ navigation, route }) => {
   const [email, setEmail] = useState('');
@@ -43,6 +44,16 @@ const LoginScreen = ({ navigation, route }) => {
       <TouchableOpacity style={styles.signUpButton} onPress={navigateToSignUp}>
         <Text style={styles.signUpButtonText}>Sign Up</Text>
       </TouchableOpacity>
+
+      <Text
+        onPress={() => navigation.navigate('Signup')}
+        style={globalStyles.linkText}
+      >
+        Don't have an account? Sign Up {'\n \n'}
+      </Text>
+
+      <Button title="Go to Profile" onPress={() => navigation.navigate('Profile')} />
+
     </View>
   );
 };
