@@ -3,9 +3,12 @@ import { StyleSheet, Text, View } from 'react-native';
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import LoginScreen from './login';
-import SignupScreen from './signup';
+import LoginScreen from './Login';
+import SignupScreen from './Signup';
+import MarketplaceScreen from './Homepage';
 import { globalStyles } from './styles';
+import Profile from './Profile'
+import EditProfile from './EditProfile'
 
 const Stack = createStackNavigator();
 
@@ -27,6 +30,17 @@ export default function App() {
               headerShown: false,
             }}
           />
+
+        <Stack.Screen name="Profile" component={Profile} 
+          options={{
+            headerShown: false,
+          }}
+        />
+
+        <Stack.Screen name="EditProfile" component={EditProfile}
+          options={{
+            headerShown: false,
+          }}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
