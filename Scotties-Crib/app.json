@@ -1,30 +1,37 @@
 {
   "expo": {
-    "name": "Scotties-Crib",
-    "slug": "Scotties-Crib",
-    "version": "1.0.0",
+    "name": "Scotties Crib",
+    "slug": "Scotties Crib",
+    "version": "0.0.1",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/splash-new.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#0b2138"
     },
     "assetBundlePatterns": [
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.cactus.scottiesCrib"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
-      }
+        "backgroundColor": "#0b2138"
+      },
+      "package": "com.cactus.scottiesCrib"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "ae583e60-37bd-4188-9b21-a7179b5f568f"
+      }
     }
   }
 }
