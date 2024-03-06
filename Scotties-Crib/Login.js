@@ -53,7 +53,7 @@ const LoginScreen = ({ navigation, route }) => {
       </Text>
 
       <Button title="Go to Profile" onPress={() => navigation.navigate('Profile')} />
-      <Button title="Homepage" onPress={() => navigation.navigate('Home')} />
+      <Button title="" onPress={() => navigation.navigate('Home')} />
     </View>
   );
 };
