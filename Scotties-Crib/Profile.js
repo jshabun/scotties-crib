@@ -27,6 +27,11 @@ const Profile = ({ navigation, route }) => {
         <Text style={styles.bioText}>Har har har har</Text>
         <View style={styles.bar}>
 
+        <Text 
+      style={globalStyles.linkText}
+      onPress={() => navigation.navigate('AddItem')}
+      >List items for sale</Text>
+
         </View>
         <Text
       style={globalStyles.linkText}
