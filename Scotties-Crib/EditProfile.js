@@ -1,23 +1,27 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import { View, Text, StyleSheet, TextInput, Button} from "react-native";
 import { globalStyles } from "./styles";
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const EditProfile = ({ navigation, route }) => {
-    const [name, setName] = useState('');
-    const [age, setAge] = useState('');
-    const [major, setMajor] = useState('');
-
-    const saveProfile = () => {
-        // Save the updated profile data
+  const [name, setName] = useState(route.params?.currentProfileData?.name || '');
+  const [year, setYear] = useState(route.params?.currentProfileData?.year || '');
+  const [major, setMajor] = useState(route.params?.currentProfileData?.major || '');
+  const [bio, setBio] = useState(route.params?.currentProfileData?.bio || '');
+  
+  
+  const saveProfile = () => {
+    // Save the updated profile data
         const updatedProfileData = {
           name: name,
-          age: age,
+          year: year,
+          major: major,
+          bio: bio,
           // Other profile fields...
         };
     
         // Navigate back to Profile screen and pass the updated data
-        navigation.navigate('Profile', { updatedProfileData });
+        navigation.navigate('Profile', { updatedProfileData: updatedProfileData });
       };
 
     return (
@@ -25,8 +29,9 @@ const EditProfile = ({ navigation, route }) => {
             <View style={styles.bar}>
 
             </View>
+            
             <View style={styles.inputContainer}>
-            <View style={styles.inputWrapper}>
+              <View style={styles.inputWrapper}>
                 <TextInput
                 style={styles.input}
                 value={name}
@@ -34,25 +39,25 @@ const EditProfile = ({ navigation, route }) => {
                 placeholder="Name"
                 placeholderTextColor="#A9A9A9"
                 />
-            </View>
-            <View style={styles.inputLine} />
+              </View>
+              <View style={styles.inputLine} />
             </View>
   
             <View style={styles.inputContainer}>
-            <View style={styles.inputWrapper}>
+              <View style={styles.inputWrapper}>
                 <TextInput
                 style={styles.input}
-                value={age}
-                onChangeText={setAge}
-                placeholder="Age"
+                value={year}
+                onChangeText={setYear}
+                placeholder="Year"
                 placeholderTextColor="#A9A9A9"
                 />
-            </View>
-            <View style={styles.inputLine} />
+              </View>
+              <View style={styles.inputLine} />
             </View>
   
             <View style={styles.inputContainer}>
-            <View style={styles.inputWrapper}>
+              <View style={styles.inputWrapper}>
                 <TextInput
                 style={styles.input}
                 value={major}
@@ -60,9 +65,23 @@ const EditProfile = ({ navigation, route }) => {
                 placeholder="Major"
                 placeholderTextColor="#A9A9A9"
                 />
+              </View>
+              <View style={styles.inputLine} />
             </View>
-            <View style={styles.inputLine} />
+
+            <View style={styles.inputContainer}>
+              <View style={styles.inputWrapper}>
+                <TextInput
+                style={styles.input}
+                value={bio}
+                onChangeText={setBio}
+                placeholder="Type up your bio here!"
+                placeholderTextColor="#A9A9A9"
+                />
+              </View>
+              <View style={styles.inputLine} />
             </View>
+
             <TouchableOpacity style={styles.button} onPress={saveProfile}>
                 <Button title="Save"/>
             </TouchableOpacity>
@@ -112,14 +131,14 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1,
         borderBottomColor: '#A9A9A9',
       },
-      button: {
-        width: '80%',
-        backgroundColor: '#97c4e1',
-        padding: 15,
-        borderRadius: 5,
-        alignItems: 'center',
-        marginTop: 10,
-      },
+    button: {
+      width: '80%',
+      backgroundColor: '#97c4e1',
+      padding: 15,
+      borderRadius: 5,
+      alignItems: 'center',
+      marginTop: 10,
+    },
 
 
 });
