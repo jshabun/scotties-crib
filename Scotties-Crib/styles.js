@@ -5,7 +5,7 @@ export const globalStyles = StyleSheet.create({
       flex: 1,
       justifyContent: 'center',
       padding: 20,
-      backgroundColor: '#f5f5f5',
+      backgroundColor: '#0b2138',
     },
     input: {
       marginBottom: 15,
@@ -18,15 +18,17 @@ export const globalStyles = StyleSheet.create({
     },
     button: {
       marginVertical: 5,
+      color: '#97c4e1',
     },
     buttonText: {
       fontSize: 18,
       color: '#ffffff',
+      textAlign: 'center',
     },
     linkText: {
-      color: '#007BFF',
+      color: '#97c4e1',
       marginTop: 15,
       textAlign: 'center',
-      fontSize: 16,
+      fontSize: 16, 
     },
   });

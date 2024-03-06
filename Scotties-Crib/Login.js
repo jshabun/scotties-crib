@@ -1,40 +1,112 @@
 import React, { useState } from 'react';
-import { View, TextInput, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { StyleSheet, View, TextInput, Text, TouchableOpacity, StatusBar, Image, Button } from 'react-native';
 import { globalStyles } from './styles';
 
-export default function Login({ navigation }) {
+const LoginScreen = ({ navigation, route }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const handleLogin = () => {
-    // Implement login logic here
-    alert('Login not implemented.');
+    // Implement login functionality here
+    console.log('Login pressed');
+  };
+
+  const navigateToSignUp = () => {
+    // Navigate to the Sign Up screen here
+    console.log('Navigate to Sign Up');
+    navigation.navigate('Signup', {name: 'Login'});
   };
 
   return (
-    <View style={globalStyles.container}>
+    <View style={styles.container}>
+      <StatusBar backgroundColor="#0b2138" barStyle="light-content" />
+      <Text style={styles.welcomeText}>Log In</Text>
+      <Image source={require('./assets/icon.png')} style={styles.logo} />
       <TextInput
+        style={styles.input}
         placeholder="Email"
+        placeholderTextColor="#97c4e1"
+        onChangeText={text => setEmail(text)}
         value={email}
-        onChangeText={setEmail}
-        style={globalStyles.input}
+        keyboardType="email-address"
       />
       <TextInput
+        style={styles.input}
         placeholder="Password"
+        placeholderTextColor="#97c4e1"
+        onChangeText={text => setPassword(text)}
         value={password}
-        onChangeText={setPassword}
-        secureTextEntry
-        style={globalStyles.input}
+        secureTextEntry={true}
       />
-      <TouchableOpacity onPress={handleLogin} style={[globalStyles.button, { backgroundColor: '#007BFF' }]}>
-        <Text style={globalStyles.buttonText}>Login</Text>
+      <TouchableOpacity style={styles.button} onPress={handleLogin}>
+        <Text style={styles.buttonText}>Log In</Text>
       </TouchableOpacity>
+      <TouchableOpacity style={styles.signUpButton} onPress={navigateToSignUp}>
+        <Text style={styles.signUpButtonText}>Sign Up</Text>
+      </TouchableOpacity>
+
       <Text
         onPress={() => navigation.navigate('Signup')}
         style={globalStyles.linkText}
       >
-        Don't have an account? Sign Up
+        Don't have an account? Sign Up {'\n \n'}
       </Text>
+      
+      <Text 
+      style={globalStyles.linkText}
+      onPress={() => navigation.navigate('Profile')}
+      >Have a profile? Go to Profile</Text>
+      {/* <Button style={globalStyles.button} title="Go to Profile" onPress={() => navigation.navigate('Profile')} /> */}
     </View>
   );
-}
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#0b2138',
+  },
+  logo: {
+    marginBottom: 20,
+    width: 250, // Set your logo width
+    height: 250, // Set your logo height
+  },
+  input: {
+    width: '80%',
+    backgroundColor: 'white',
+    padding: 15,
+    marginBottom: 10,
+    borderRadius: 5,
+    color: '#0b2138',
+  },
+  welcomeText: {
+    color: 'white',
+    fontSize: 36,
+    marginBottom: 20, // Adjusted for spacing
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+  button: {
+    width: '80%',
+    backgroundColor: '#97c4e1',
+    padding: 15,
+    borderRadius: 5,
+    alignItems: 'center',
+    marginTop: 10,
+  },
+  buttonText: {
+    color: 'white',
+    fontSize: 16,
+  },
+  signUpButton: {
+    marginTop: 15,
+  },
+  signUpButtonText: {
+    color: '#97c4e1',
+    fontSize: 16,
+  },
+});
+
+export default LoginScreen;
