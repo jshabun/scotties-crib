@@ -41,9 +41,9 @@ const LoginScreen = ({ navigation, route }) => {
       <TouchableOpacity style={styles.button} onPress={handleLogin}>
         <Text style={styles.buttonText}>Log In</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.signUpButton} onPress={navigateToSignUp}>
+      {/* <TouchableOpacity style={styles.signUpButton} onPress={navigateToSignUp}>
         <Text style={styles.signUpButtonText}>Sign Up</Text>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
 
       <Text
         onPress={() => navigation.navigate('Signup')}
@@ -53,7 +53,7 @@ const LoginScreen = ({ navigation, route }) => {
       </Text>
 
       <Button title="Go to Profile" onPress={() => navigation.navigate('Profile')} />
-
+      <Button title="Homepage" onPress={() => navigation.navigate('Home')} />
     </View>
   );
 };
