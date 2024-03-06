@@ -3,15 +3,15 @@ import { View, TextInput, Text, TouchableOpacity, StyleSheet } from 'react-nativ
 import { globalStyles } from './styles';
 
 
-const Profile = () => {
+const ProfileScreen = () => {
   return (
     <View>
       <Text style={{ textAlign: 'center', fontSize: 32}}>
-        Profile Page
+        Your Profile
       </Text>
       
     </View>
   );
 };
 
-export default Profile;
+export default ProfileScreen;
