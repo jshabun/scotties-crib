@@ -1,6 +1,5 @@
 import React from 'react';
 import { View, TextInput, Text, TouchableOpacity, StyleSheet } from 'react-native';
-import { globalStyles } from './styles';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
@@ -11,22 +10,22 @@ const HomeScreen = () => {
         <Text style={{ textAlign: 'center', fontSize: 32, color: 'white'}}>
             Your Homepage
         </Text>
-        <NavigationContainer>
+          <NavigationContainer>
             <TabNavigation/> 
-        </NavigationContainer>
+          </NavigationContainer>
         </View>
     
   );
 };
 
 
-const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center',
-      backgroundColor: '#0b2138',
-    }
-});
+// const styles = StyleSheet.create({
+//     container: {
+//       flex: 1,
+//       justifyContent: 'center',
+//       alignItems: 'center',
+//       backgroundColor: '#0b2138',
+//     }
+// });
 
 export default HomeScreen;
