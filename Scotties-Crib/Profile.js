@@ -7,7 +7,7 @@ const ProfileScreen = () => {
   return (
     <View>
       <Text style={{ textAlign: 'center', fontSize: 32}}>
-        Your Profile
+        Your Profile 
       </Text>
       
     </View>
