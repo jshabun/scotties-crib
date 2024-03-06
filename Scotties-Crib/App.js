@@ -1,58 +1,29 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
 import React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import LoginScreen from './Login';
-import SignupScreen from './Signup';
-import { globalStyles } from './styles';
-import ProfileScreen from './Profile';
-import HomeScreen from './Home';
+import {Text, View} from 'react-native';
+import LoginScreen from './Apps/Screens/LoginScreen'
+import { StatusBar } from 'expo-status-bar';
+import { ClerkProvider } from '@clerk/clerk-expo';
+import { SignedIn } from '@clerk/clerk-expo';
+import { SignedOut } from '@clerk/clerk-expo';
 
-const Stack = createStackNavigator();
-
-export default function App() {
+const YourApp = () => {
   return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="Login">
-        <Stack.Screen 
-          name="Login" 
-          component={LoginScreen}
-          options={{
-            headerShown: false,   
-          }}
-        />
-        <Stack.Screen
-            name="Signup"
-            component={SignupScreen}
-            options={{
-              headerShown: false,
-            }}
-          />
-        <Stack.Screen 
-          name="Profile" 
-          component={ProfileScreen} 
-          />
-        <Stack.Screen 
-          name="Home" 
-          component={HomeScreen} 
-          />
+    <ClerkProvider publishableKey='pk_test_c3RlcmxpbmctZ3VsbC0xNS5jbGVyay5hY2NvdW50cy5kZXYk'>
+    <View className="flex-1 bg-white">
+      {/* <Text>ScottiesCrib🎉</Text> */}
+      <StatusBar style='auto'/>
 
-      </Stack.Navigator>
-    </NavigationContainer>
+        <SignedIn>
+          <Text>You are Signed in</Text>
+        </SignedIn>
+        <SignedOut>
+         <LoginScreen/>
+        </SignedOut>
+      
+    </View>
+    </ClerkProvider>
+
   );
-}
+};
 
-
-
-
-/*
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
-*/
+export default YourApp;
