@@ -6,7 +6,8 @@ import { createStackNavigator } from '@react-navigation/stack';
 import LoginScreen from './Login';
 import SignupScreen from './Signup';
 import { globalStyles } from './styles';
-import Profile from './Profile'
+import ProfileScreen from './Profile';
+import HomeScreen from './Home';
 
 const Stack = createStackNavigator();
 
@@ -28,9 +29,15 @@ export default function App() {
               headerShown: false,
             }}
           />
+        <Stack.Screen 
+          name="Profile" 
+          component={ProfileScreen} 
+          />
+        <Stack.Screen 
+          name="Home" 
+          component={HomeScreen} 
+          />
 
-
-        <Stack.Screen name="Profile" component={Profile} />
       </Stack.Navigator>
     </NavigationContainer>
   );
