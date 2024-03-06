@@ -1,6 +1,5 @@
 import {View, Text} from 'react-native'
 import React from 'react'
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HomeScreen from '../Screens/HomeScreen';
 import UploadScreen from '../Screens/UploadScreen';
 import ProfileScreen from '../Screens/ProfileScreen';
