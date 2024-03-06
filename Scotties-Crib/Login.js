@@ -1,15 +1,40 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, TextInput, Text, TouchableOpacity, StatusBar, Image, Button } from 'react-native';
 import { globalStyles } from './styles';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const LoginScreen = ({ navigation, route }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleLogin = () => {
-    // Implement login functionality here
-    console.log('Login pressed');
-  };
+  const handleLogin = async () => {
+  try {
+    // Retrieve stored email and password combinations from AsyncStorage
+    const storedUsersJson = await AsyncStorage.getItem('users');
+    const storedUsers = storedUsersJson ? JSON.parse(storedUsersJson) : [];
+
+    // Find a user with the entered email
+    const foundUser = storedUsers.find(user => user.email === email);
+
+    if (foundUser) {
+      // Check if the entered password matches the stored password for the found user
+      if (password === foundUser.password) {
+        console.log('Login successful');
+        // Navigate to another screen after successful login
+        navigation.navigate('Profile');
+        return;
+      } else {
+        console.log('Invalid password');
+      }
+    } else {
+      console.log('User not found');
+    }
+    // Handle invalid email or password (e.g., show an error message)
+  } catch (error) {
+    console.error('Error logging in:', error);
+    // Handle other errors (e.g., show an error message)
+  }
+};
 
   const navigateToSignUp = () => {
     // Navigate to the Sign Up screen here
