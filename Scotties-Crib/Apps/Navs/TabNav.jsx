@@ -5,6 +5,7 @@ import UploadScreen from '../Screens/UploadScreen';
 import ProfileScreen from '../Screens/ProfileScreen';
 
 
+const Tab = createBottomTabNavigator();
 
 function MyTabs() {
   return (
