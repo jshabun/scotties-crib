@@ -6,8 +6,11 @@ import { createStackNavigator } from '@react-navigation/stack';
 import LoginScreen from './Login';
 import SignupScreen from './Signup';
 import { globalStyles } from './styles';
-import Profile from './Profile'
-import EditProfile from './EditProfile'
+import Profile from './Profile';
+import EditProfile from './EditProfile';
+import HomeScreen from './Home';
+import NavBar from './NavBar';
+
 
 const Stack = createStackNavigator();
 
@@ -39,6 +42,20 @@ export default function App() {
         options={{
           headerShown: false,
         }}/>
+
+        <Stack.Screen
+          name="Home"
+          options={{ headerShown: false }}
+        >
+          {() => (
+            <NavigationContainer independent={true}>
+              <NavBar>
+                <Stack.Screen name="Home" component={HomeScreen} />
+              </NavBar>
+            </NavigationContainer>
+          )}
+        </Stack.Screen>
+
 
 
       </Stack.Navigator>
