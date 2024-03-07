@@ -1,5 +1,4 @@
 import { StyleSheet, Text, View, TextInput } from 'react-native';
-import { moderateScale } from 'react-native-size-matters';
 
 export default function Input({
     containerStyle,
@@ -45,29 +44,29 @@ const styles = StyleSheet.create({
     error: {
         color: "red",
         fontWeight: "400",
-        fontSize: moderateScale(11),
+        fontSize: 11,
         marginTop: "2%"
     },
     errorBorder: {
-        borderColor: "black",
+        borderColor: "red",
         borderWidth: 2,
     },
     inputBox: {
         flexDirection: "row",
-        height: moderateScale(59),
+        height: 59,
         borderWidth: 1,
         borderRadius: 5,
         borderColor: "A1A5AC"
     },
     input: {
         flex: 1,
-        fontSize: moderateScale(18),
+        fontSize: 18,
         paddingHorizontal: "3%",
-        color: "1A1A1A"
+        color: "white"
     },
     label: {
         fontWeight: "400",
-        fontSize: moderateScale(14),
+        fontSize: 14,
         marginBottom: "2%",
     },
     icon: {

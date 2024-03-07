@@ -1,5 +1,4 @@
 import { StyleSheet, Text, View } from 'react-native';
-import { moderateScale } from 'react-native-size-matters';
 
 export default function Header({
     title,
@@ -25,14 +24,14 @@ const styles = StyleSheet.create({
         marginHorizontal: "5%"
     },
     title: {
-        fontSize: moderateScale(24),
+        fontSize: 24,
         fontWeight: "600",
-        color: "#232E43"
+        color: "white"
     },
     text: {
-        fontSize: moderateScale(14),
+        fontSize: 14,
         fontWeight: "300",
-        color: "#8593AD",
+        color: "white",
         lineHeight: 21,
         marginTop: "5%"
     }
