@@ -8,7 +8,10 @@ const HomeScreen = () => {
     <View style={styles.container}>
       <ScrollView style={styles.scrollView}>
         <SearchBar />
-        
+        <Image
+          source={require('./assets/freddy.jpg')}
+          style={styles.image}
+        /> 
         {/* <NavBar /> */}
       </ScrollView>
     </View>
@@ -20,6 +23,11 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 24,
     backgroundColor: 'white',
+  },
+  image: {
+    width: '100%',
+    height: '100%',
+    borderRadius: 75, 
   },
 });
 
