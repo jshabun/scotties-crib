@@ -53,7 +53,7 @@ const LoginScreen = ({ navigation, route }) => {
           // Save the logged-in user's email
           await AsyncStorage.setItem('loggedInUserEmail', email);
           // Navigate to another screen after successful login
-          navigation.navigate('Profile');
+          navigation.navigate('Home');
         } else {
           console.log('Invalid email or password');
           alert('Invalid email or password')
@@ -112,10 +112,10 @@ const LoginScreen = ({ navigation, route }) => {
         Don't have an account? Sign Up {'\n \n'}
       </Text> */}
       
-      <Text 
+      {/* <Text 
       style={globalStyles.linkText}
       onPress={() => navigation.navigate('Profile')}
-      >Have a profile? Go to Profile</Text>
+      >Have a profile? Go to Profile</Text> */}
 
       <Text 
       style={styles.button}
