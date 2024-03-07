@@ -1,11 +1,3 @@
-.DS_Store
-node_modules/
-Scotties-Crib/node_modules/
-Scotties-Crib/.expo
-Scotties-Crib/ios
-package-lock.json
-package.json
-
 # Learn more https://docs.github.com/en/get-started/getting-started-with-git/ignoring-files
 
 # dependencies
@@ -41,7 +33,3 @@ yarn-error.*
 
 # typescript
 *.tsbuildinfo
-
-# build
-android/
-ios/

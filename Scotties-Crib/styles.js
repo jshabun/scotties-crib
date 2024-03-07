@@ -29,6 +29,6 @@ export const globalStyles = StyleSheet.create({
       color: '#97c4e1',
       marginTop: 15,
       textAlign: 'center',
-      fontSize: 16,
+      fontSize: 16, 
     },
   });
