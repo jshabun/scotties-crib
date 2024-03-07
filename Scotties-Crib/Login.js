@@ -112,27 +112,12 @@ const LoginScreen = ({ navigation, route }) => {
         <Text style={styles.signUpButtonText}>Forgot Your Password?</Text>
       </TouchableOpacity>
 
-      {/* <Text
-        onPress={() => navigation.navigate('Signup')}
-        style={globalStyles.linkText}
-      >
-        Don't have an account? Sign Up {'\n \n'}
-      </Text> */}
-      
-      {/* <Text 
-      style={globalStyles.linkText}
-      onPress={() => navigation.navigate('Profile')}
-      >Have a profile? Go to Profile</Text> */}
-
-      <Text 
-      style={styles.button}
-      onPress={showAsyncStorage}
-      >Show Async Storage</Text>
-      <Text 
-      style={styles.button}
-      onPress={clearAsyncStorage}
-      >Clear Async Storage</Text>
-      {/* <Button style={globalStyles.button} title="Go to Profile" onPress={() => navigation.navigate('Profile')} /> */}
+      <TouchableOpacity style={styles.devButton} onPress={showAsyncStorage}>
+        <Text style={styles.buttonText}>Show Async Storage</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.devButton1} onPress={clearAsyncStorage}>
+        <Text style={styles.buttonText}>Clear Async Storage</Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -145,7 +130,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#0b2138',
   },
   logo: {
-    marginBottom: 20,
+    marginBottom: 10,
     width: 250, // Set your logo width
     height: 250, // Set your logo height
   },
@@ -167,6 +152,22 @@ const styles = StyleSheet.create({
   button: {
     width: '80%',
     backgroundColor: '#97c4e1',
+    padding: 15,
+    borderRadius: 5,
+    alignItems: 'center',
+    marginTop: 10,
+  },
+  devButton: {
+    width: '50%',
+    backgroundColor: "#FA8072",
+    padding: 15,
+    borderRadius: 5,
+    alignItems: 'center',
+    marginTop: 20,
+  },
+  devButton1: {
+    width: '50%',
+    backgroundColor: "#FA8072",
     padding: 15,
     borderRadius: 5,
     alignItems: 'center',
