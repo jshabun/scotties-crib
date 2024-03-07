@@ -8,7 +8,7 @@ import SignupScreen from './Signup';
 import { globalStyles } from './styles';
 import Profile from './Profile'
 import EditProfile from './EditProfile'
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
 const Stack = createStackNavigator();
 
 export default function App() {
