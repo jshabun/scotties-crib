@@ -33,6 +33,7 @@ const SignupScreen = ({ navigation, route }) => {
         year: '',
         major: '',
         bio: '',
+        image: null,
        };
       const updatedUsers = [...existingUsers, newUser];
 

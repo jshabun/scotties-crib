@@ -8,6 +8,7 @@ import SignupScreen from './Signup';
 import { globalStyles } from './styles';
 import Profile from './Profile'
 import EditProfile from './EditProfile'
+import AddItem from './AddItem';
 
 const Stack = createStackNavigator();
 
@@ -40,6 +41,10 @@ export default function App() {
           headerShown: false,
         }}/>
 
+        <Stack.Screen name="AddItem" component={AddItem}
+        options={{
+          headerShown: false,
+        }}/>
 
       </Stack.Navigator>
     </NavigationContainer>

@@ -60,6 +60,7 @@ const LoginScreen = ({ navigation, route }) => {
         }
       } else {
         console.log('No stored users found');
+        alert('No user with that email exists')
         // Handle case where no users are stored
       }
     } catch (error) {
