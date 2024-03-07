@@ -104,7 +104,7 @@ const ProfileScreen = ({ navigation, route }) => {
   
       if (currentUser) {
         // Set profile data based on the current user's information
-        setName(currentUser.name || 'Edit your profile!');
+        setName(currentUser.name || '');
         setYear(currentUser.year || '');
         setMajor(currentUser.major || '');
         setBio(currentUser.bio || '');
@@ -148,7 +148,7 @@ const ProfileScreen = ({ navigation, route }) => {
         <Text style={styles.profileText}>{name}</Text>
         <Text style={styles.bioText}>Year: {year}{'\n'}</Text>
         <Text style={styles.bioText}>Major: {major}{'\n'}</Text>
-
+        <Text style={styles.bioText}>{bio}{'\n'}</Text>
         <View style={styles.bar}>
 
         </View>
