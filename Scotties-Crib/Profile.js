@@ -7,7 +7,7 @@ import { useFocusEffect } from '@react-navigation/native';
 
 
 
-const Profile = ({ navigation, route }) => {
+const ProfileScreen = ({ navigation, route }) => {
   const [name, setName] = useState('');
   const [year, setYear] = useState('');
   const [major, setMajor] = useState('');
@@ -160,4 +160,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Profile;
+export default ProfileScreen;
