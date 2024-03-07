@@ -42,19 +42,12 @@ export default function App() {
         options={{
           headerShown: false,
         }}/>
-
+        <Stack.Screen name="Home" component={HomeScreen} options={{ headerShown: false }} />
         <Stack.Screen
-          name="Home"
+          name="HomeWithNavBar"
+          component={NavBar}
           options={{ headerShown: false }}
-        >
-          {() => (
-            <NavigationContainer independent={true}>
-              <NavBar>
-                <Stack.Screen name="Home" options={{ headerShown: false }} component={HomeScreen} />
-              </NavBar>
-            </NavigationContainer>
-          )}
-        </Stack.Screen>
+        />
 
 
 
@@ -64,6 +57,22 @@ export default function App() {
 }
 
 
+const HomeWithNavBar = () => {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen 
+        name="Home" 
+        component={HomeScreen}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen 
+        name="Main" 
+        component={NavBar}
+        options={{ headerShown: false }}
+      />
+    </Stack.Navigator>
+  );
+};
 
 
 /*

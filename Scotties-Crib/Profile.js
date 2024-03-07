@@ -4,7 +4,7 @@ import { globalStyles } from './styles';
 import updatedProfileData from './EditProfile'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useFocusEffect } from '@react-navigation/native';
-
+import * as ImagePicker from 'expo-image-picker';
 
 
 const ProfileScreen = ({ navigation, route }) => {
