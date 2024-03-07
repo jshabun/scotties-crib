@@ -1,15 +1,50 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, TextInput, Text, TouchableOpacity, StatusBar, Image } from 'react-native';
+import { StyleSheet, View, TextInput, Text, TouchableOpacity, StatusBar, Image, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 const ForgotPassword = ({ navigation, route }) => {
   const [email, setEmail] = useState('');
   //const [password, setPassword] = useState('');
 
-  const navigateToResetPassword = () => {
+  const navigateToResetPassword = async () => {
     // Navigate to the Forgot Password screen here
-    console.log('Navigate to Reset Password');
-    navigation.navigate('ResetPassword');
+    try {
+        if (email.trim() === '' || !email.includes('@')) {
+            console.log('Invalid email format');
+            Alert.alert('Invalid Email', 'Please check that the email was entered correctly');
+            return;
+        }
+
+        const storedUsersJson = await AsyncStorage.getItem('users');
+        // console.log(storedUsersJson)
+        const storedUsers = storedUsersJson ? JSON.parse(storedUsersJson) : [];
+  
+        // Check if users exist in AsyncStorage
+        if (storedUsers.length > 0) {
+            // Find the user with the entered email
+            const user = storedUsers.find(user => user.email === email);
+    
+            if (user && user.email === email) {
+                console.log('Reset verification success');
+                // Save the logged-in user's email
+                await AsyncStorage.setItem('loggedInUserEmail', email);
+                // Navigate to another screen after successful verification
+                console.log('Navigate to Reset Password');
+                navigation.navigate('ResetPassword');
+            } else {
+                console.log('Invalid email');
+                Alert.alert('Error', 'Invalid email');
+            }
+        } else {
+            console.log('No stored users found');
+            Alert.alert('Error', 'No stored users found');
+        }
+    } catch (error) {
+        console.error('Error going to password reset:', error);
+        // Handle other errors (e.g., show an error message)
+    }
+    
   };
 
   const navigateToLogin = () => {
