@@ -93,6 +93,7 @@ const LoginScreen = ({ navigation, route }) => {
         onChangeText={text => setEmail(text)}
         value={email}
         keyboardType="email-address"
+        autoCapitalize='none'
       />
       <TextInput
         style={styles.input}
@@ -101,6 +102,7 @@ const LoginScreen = ({ navigation, route }) => {
         onChangeText={text => setPassword(text)}
         value={password}
         secureTextEntry={true}
+        autoCapitalize='none'
       />
       <TouchableOpacity style={styles.button} onPress={handleLogin}>
         <Text style={styles.buttonText}>Log In</Text>
@@ -159,7 +161,7 @@ const styles = StyleSheet.create({
   },
   devButton: {
     width: '50%',
-    backgroundColor: "#FA8072",
+    backgroundColor: "#66CDAA",
     padding: 15,
     borderRadius: 5,
     alignItems: 'center',

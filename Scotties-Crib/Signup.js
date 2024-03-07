@@ -71,6 +71,7 @@ const SignupScreen = ({ navigation, route }) => {
         onChangeText={text => setEmail(text)}
         value={email}
         keyboardType="email-address"
+        autoCapitalize='none'
       />
       <TextInput
         style={styles.input}
@@ -79,6 +80,7 @@ const SignupScreen = ({ navigation, route }) => {
         onChangeText={text => setPassword(text)}
         value={password}
         secureTextEntry={true}
+        autoCapitalize='none'
       />
       <TouchableOpacity style={styles.button} onPress={handleSignup}>
         <Text style={styles.buttonText}>Sign Up</Text>

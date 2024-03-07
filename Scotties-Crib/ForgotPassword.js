@@ -3,7 +3,7 @@ import { StyleSheet, View, TextInput, Text, TouchableOpacity, StatusBar, Image, 
 import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage'
 
-const ForgotPassword = ({ navigation, route }) => {
+const ForgotPassword = ({ navigation }) => {
   const [email, setEmail] = useState('');
   //const [password, setPassword] = useState('');
 
@@ -31,7 +31,7 @@ const ForgotPassword = ({ navigation, route }) => {
                 await AsyncStorage.setItem('loggedInUserEmail', email);
                 // Navigate to another screen after successful verification
                 console.log('Navigate to Reset Password');
-                navigation.navigate('ResetPassword');
+                navigation.navigate('ResetPassword', {email: email});
             } else {
                 console.log('Invalid email');
                 Alert.alert('Error', 'Invalid email');
@@ -64,6 +64,7 @@ const ForgotPassword = ({ navigation, route }) => {
             onChangeText={text => setEmail(text)}
             value={email}
             keyboardType="email-address"
+            autoCapitalize='none'
         />
       <TouchableOpacity style={styles.button} onPress={navigateToResetPassword}>
         <Text style={styles.buttonText}>Verify Email</Text>
