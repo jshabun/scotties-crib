@@ -3,6 +3,7 @@ import { StyleSheet, View, TextInput, Text, TouchableOpacity, StatusBar, Image, 
 import { globalStyles } from './styles';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+
 const LoginScreen = ({ navigation, route }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -111,10 +112,10 @@ const LoginScreen = ({ navigation, route }) => {
         Don't have an account? Sign Up {'\n \n'}
       </Text> */}
       
-      {/* <Text 
+      <Text 
       style={globalStyles.linkText}
       onPress={() => navigation.navigate('Profile')}
-      >Have a profile? Go to Profile</Text> */}
+      >Have a profile? Go to Profile</Text>
 
       <Text 
       style={styles.button}
