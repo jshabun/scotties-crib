@@ -1,17 +1,23 @@
 import React, {useState, useEffect} from 'react';
-import { View, TextInput, Text, TouchableOpacity, StyleSheet, Image, StatusBar } from 'react-native';
+
+import { View, TextInput, Text, StyleSheet, Image, StatusBar, Button } from 'react-native';
+import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 import { globalStyles } from './styles';
 import updatedProfileData from './EditProfile'
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage'
+
 import { useFocusEffect } from '@react-navigation/native';
+import * as ImagePicker from 'expo-image-picker';
 
 
 
 const ProfileScreen = ({ navigation, route }) => {
+
   const [name, setName] = useState('');
   const [year, setYear] = useState('');
   const [major, setMajor] = useState('');
   const [bio, setBio] = useState('');
+  const [image, setImage] = useState(null);
   // const [updatedProfileData, setUpdatedProfileData] = useState({
   //   name: '',
   //   year: '',
@@ -25,6 +31,53 @@ const ProfileScreen = ({ navigation, route }) => {
   
     return unsubscribe;
   }, [navigation]);
+
+
+  const pickImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
+
+    console.log("Image picker result:", result);
+
+    if (!result.cancelled) {
+      setImage(result.assets[0].uri);
+      saveImageToStorage(result.assets[0].uri);
+    }
+  };
+
+
+  const saveImageToStorage = async (uri) => {
+    try {
+      console.log(uri)
+      // Get the email of the currently logged-in user
+      const loggedInUserEmail = await AsyncStorage.getItem('loggedInUserEmail');
+      console.log('Logged-in user email:', loggedInUserEmail);
+  
+      // Retrieve the list of users from AsyncStorage
+      const usersJson = await AsyncStorage.getItem('users');
+      console.log('Users from AsyncStorage:', usersJson);
+      let users = usersJson ? JSON.parse(usersJson) : [];
+  
+      // Update the image field of the corresponding user
+      const updatedUsers = users.map(user => {
+        if (user.email === loggedInUserEmail) {
+          console.log('Updating user with email:', loggedInUserEmail);
+          return { ...user, image: uri }; // Add the image property to the user object
+        }
+        return user;
+      });
+  
+      // Save the updated users array back to AsyncStorage
+      await AsyncStorage.setItem('users', JSON.stringify(updatedUsers));
+      console.log('Users after update:', updatedUsers);
+    } catch (error) {
+      console.error('Error saving image to AsyncStorage:', error);
+    }
+  };
 
   // useEffect(() => {
   //   // Save profile data whenever it changes
@@ -51,10 +104,13 @@ const ProfileScreen = ({ navigation, route }) => {
   
       if (currentUser) {
         // Set profile data based on the current user's information
-        setName(currentUser.name || 'Edit your profile!');
+        setName(currentUser.name || '');
         setYear(currentUser.year || '');
         setMajor(currentUser.major || '');
         setBio(currentUser.bio || '');
+
+        setImage(currentUser.image || null) 
+
       } else {
         console.log('User not found');
         // Handle case where the user is not found (e.g., show an error message)
@@ -80,19 +136,19 @@ const ProfileScreen = ({ navigation, route }) => {
         onPress={() => navigation.navigate('EditProfile')}>
           <Text style={styles.linkText}>Edit</Text>
 
+
         </TouchableOpacity>
       </View>
-      <View style={styles.circle}>
+      <View style={styles.circle} onTouchEnd={pickImage}>
         <Image
-          source={require('./assets/freddy.jpg')}
+          source={image === null ? require('./assets/freddy.jpg') : { uri: image }}
           style={styles.image}
-          />
-        
-        </View>
+        /> 
+      </View>
         <Text style={styles.profileText}>{name}</Text>
         <Text style={styles.bioText}>Year: {year}{'\n'}</Text>
         <Text style={styles.bioText}>Major: {major}{'\n'}</Text>
-
+        <Text style={styles.bioText}>{bio}{'\n'}</Text>
         <View style={styles.bar}>
 
         </View>
@@ -100,6 +156,7 @@ const ProfileScreen = ({ navigation, route }) => {
       style={globalStyles.linkText}
       onPress={() => navigation.navigate('Login')}
       >Back to login</Text>
+
     </View>
   );
 };
@@ -122,6 +179,16 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     width: '100%'
   },
+
+  button: {
+    width: '80%',
+    backgroundColor: '#97c4e1',
+    padding: 15,
+    borderRadius: 5,
+    alignItems: 'center',
+    marginTop: 10,
+  },
+
   circle: {
     width: 130,
     height: 130,
@@ -158,6 +225,11 @@ const styles = StyleSheet.create({
   editButton: {
     padding: 10,
   },
+
+  listingsContainer: {
+    marginTop: 1,
+  },
 });
+
 
 export default ProfileScreen;

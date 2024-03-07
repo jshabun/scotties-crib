@@ -1,6 +1,5 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { NavigationContainer } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
 import { StyleSheet } from 'react-native';
 
@@ -56,7 +55,7 @@ const styles = StyleSheet.create({
     fontSize: 12,
   },
   tabBar: {
-    height:80,
+    height: 80,
     display: 'flex',
     backgroundColor: 'white',
   },
