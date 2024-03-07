@@ -51,10 +51,10 @@ const Profile = ({ navigation, route }) => {
   
       if (currentUser) {
         // Set profile data based on the current user's information
-        setName(currentUser.name || 'Initial');
-        setYear(currentUser.year || 'Initial');
-        setMajor(currentUser.major || 'Initial');
-        setBio(currentUser.bio || 'Initial');
+        setName(currentUser.name || 'Edit your profile!');
+        setYear(currentUser.year || '');
+        setMajor(currentUser.major || '');
+        setBio(currentUser.bio || '');
       } else {
         console.log('User not found');
         // Handle case where the user is not found (e.g., show an error message)
