@@ -7,34 +7,58 @@ const LoginScreen = ({ navigation, route }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleLogin = async () => {
-  try {
-    // Retrieve stored email and password combinations from AsyncStorage
-    const storedUsersJson = await AsyncStorage.getItem('users');
-    const storedUsers = storedUsersJson ? JSON.parse(storedUsersJson) : [];
-
-    // Find a user with the entered email
-    const foundUser = storedUsers.find(user => user.email === email);
-
-    if (foundUser) {
-      // Check if the entered password matches the stored password for the found user
-      if (password === foundUser.password) {
-        console.log('Login successful');
-        // Navigate to another screen after successful login
-        navigation.navigate('Profile');
-        return;
-      } else {
-        console.log('Invalid password');
-      }
-    } else {
-      console.log('User not found');
+  const showAsyncStorage = async () => {
+    try {
+      const storedUsersJson = await AsyncStorage.getItem('users');
+      console.log(storedUsersJson)
     }
-    // Handle invalid email or password (e.g., show an error message)
-  } catch (error) {
-    console.error('Error logging in:', error);
-    // Handle other errors (e.g., show an error message)
+    catch (error) {
+      console.error('Error showing Async Storage:', error);
+    }
+
+
   }
-};
+  const clearAsyncStorage = async () => {
+    try {
+      await AsyncStorage.clear();
+      console.log('AsyncStorage cleared successfully.');
+    } catch (error) {
+      console.error('Error clearing AsyncStorage:', error);
+    }
+  };
+  const handleLogin = async () => {
+    try {
+      // Retrieve stored users from AsyncStorage
+      const storedUsersJson = await AsyncStorage.getItem('users');
+      // console.log(storedUsersJson)
+      const storedUsers = storedUsersJson ? JSON.parse(storedUsersJson) : [];
+  
+      // Check if users exist in AsyncStorage
+      if (storedUsers.length > 0) {
+        // Find the user with the entered email
+        const user = storedUsers.find(user => user.email === email);
+  
+        if (user && user.password === password) {
+          console.log('Login successful');
+          // Save the logged-in user's email
+          await AsyncStorage.setItem('loggedInUserEmail', email);
+          // Navigate to another screen after successful login
+          navigation.navigate('Profile');
+        } else {
+          console.log('Invalid email or password');
+          // Handle invalid email or password (e.g., show an error message)
+        }
+      } else {
+        console.log('No stored users found');
+        // Handle case where no users are stored
+      }
+    } catch (error) {
+      console.error('Error logging in:', error);
+      // Handle other errors (e.g., show an error message)
+    }
+  };
+  
+  
 
   const navigateToSignUp = () => {
     // Navigate to the Sign Up screen here
@@ -70,17 +94,26 @@ const LoginScreen = ({ navigation, route }) => {
         <Text style={styles.signUpButtonText}>Sign Up</Text>
       </TouchableOpacity>
 
-      <Text
+      {/* <Text
         onPress={() => navigation.navigate('Signup')}
         style={globalStyles.linkText}
       >
         Don't have an account? Sign Up {'\n \n'}
-      </Text>
+      </Text> */}
       
-      <Text 
+      {/* <Text 
       style={globalStyles.linkText}
       onPress={() => navigation.navigate('Profile')}
-      >Have a profile? Go to Profile</Text>
+      >Have a profile? Go to Profile</Text> */}
+
+      <Text 
+      style={styles.button}
+      onPress={showAsyncStorage}
+      >Show Async Storage</Text>
+      <Text 
+      style={styles.button}
+      onPress={clearAsyncStorage}
+      >Clear Async Storage</Text>
       {/* <Button style={globalStyles.button} title="Go to Profile" onPress={() => navigation.navigate('Profile')} /> */}
     </View>
   );

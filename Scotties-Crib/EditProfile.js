@@ -2,28 +2,60 @@ import React, {useState, useEffect} from 'react'
 import { View, Text, StyleSheet, TextInput, Button} from "react-native";
 import { globalStyles } from "./styles";
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const EditProfile = ({ navigation, route }) => {
-  const [name, setName] = useState(route.params?.currentProfileData?.name || '');
-  const [year, setYear] = useState(route.params?.currentProfileData?.year || '');
-  const [major, setMajor] = useState(route.params?.currentProfileData?.major || '');
-  const [bio, setBio] = useState(route.params?.currentProfileData?.bio || '');
-  
-  
-  const saveProfile = () => {
-    // Save the updated profile data
-        const updatedProfileData = {
-          name: name,
-          year: year,
-          major: major,
-          bio: bio,
-          // Other profile fields...
-        };
-    
-        // Navigate back to Profile screen and pass the updated data
-        navigation.navigate('Profile', { updatedProfileData: updatedProfileData });
-      };
+const EditProfile = ({navigation}) => {
+  const [name, setName] = useState('');
+  const [year, setYear] = useState('');
+  const [major, setMajor] = useState('');
+  const [bio, setBio] = useState('');
 
+  
+  const saveProfile = async () => {
+    try {
+      // Retrieve the existing users from AsyncStorage
+      const existingUsersJson = await AsyncStorage.getItem('users');
+      const existingUsers = existingUsersJson ? JSON.parse(existingUsersJson) : [];
+      
+      // Retrieve the currently logged-in user's email from AsyncStorage
+      const loggedInUserEmail = await AsyncStorage.getItem('loggedInUserEmail');
+      console.log(loggedInUserEmail)
+  
+      // Find the index of the logged-in user in the existing users array
+      const userIndex = existingUsers.findIndex(user => user.email === loggedInUserEmail);
+      if (userIndex !== -1) {
+        // Update the user's profile data
+        existingUsers[userIndex].name = name;
+        existingUsers[userIndex].year = year;
+        existingUsers[userIndex].major = major;
+        existingUsers[userIndex].bio = bio;
+        // console.log(name)
+        // console.log(year)
+        // console.log(major)
+        // console.log(bio)
+        // console.log(existingUsers[userIndex])
+        // Save the updated users array back to AsyncStorage
+        await AsyncStorage.setItem('users', JSON.stringify(existingUsers));
+  
+        console.log('Profile data saved successfully.');
+  
+        // Navigate back to the Profile screen
+        navigation.navigate('Profile');
+      } else {
+        console.log('Logged-in user not found in AsyncStorage.');
+        // Handle case where logged-in user is not found
+      }
+    } catch (error) {
+      console.error('Error saving profile data:', error);
+      // Handle error while saving profile data
+    }
+  };
+
+
+
+
+
+  
     return (
         <View style={styles.container}>
             <View style={styles.bar}>

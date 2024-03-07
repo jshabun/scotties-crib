@@ -26,12 +26,19 @@ const SignupScreen = ({ navigation, route }) => {
       const existingUsers = existingUsersJson ? JSON.parse(existingUsersJson) : [];
 
       // Add the new user to the existing users array
-      const newUser = { email, password };
+      const newUser = { 
+        email, 
+        password,
+        name: '',
+        year: '',
+        major: '',
+        bio: '',
+       };
       const updatedUsers = [...existingUsers, newUser];
 
       // Save updated users array back to AsyncStorage
       await AsyncStorage.setItem('users', JSON.stringify(updatedUsers));
-
+      await AsyncStorage.setItem('loggedInUserEmail', email);
       console.log('Signup successful');
 
       // Navigate to another screen after successful signup
