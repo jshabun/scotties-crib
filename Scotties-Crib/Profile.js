@@ -1,15 +1,18 @@
 import React, {useState, useEffect} from 'react';
+
 import { View, TextInput, Text, StyleSheet, Image, StatusBar, Button } from 'react-native';
 import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 import { globalStyles } from './styles';
 import updatedProfileData from './EditProfile'
 import AsyncStorage from '@react-native-async-storage/async-storage'
+
 import { useFocusEffect } from '@react-navigation/native';
 import * as ImagePicker from 'expo-image-picker';
 
 
 
-const Profile = ({ navigation, route }) => {
+const ProfileScreen = ({ navigation, route }) => {
+
   const [name, setName] = useState('');
   const [year, setYear] = useState('');
   const [major, setMajor] = useState('');
@@ -29,7 +32,7 @@ const Profile = ({ navigation, route }) => {
     return unsubscribe;
   }, [navigation]);
 
-  
+
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
@@ -75,6 +78,7 @@ const Profile = ({ navigation, route }) => {
       console.error('Error saving image to AsyncStorage:', error);
     }
   };
+
   // useEffect(() => {
   //   // Save profile data whenever it changes
   //   saveProfileData();
@@ -104,7 +108,9 @@ const Profile = ({ navigation, route }) => {
         setYear(currentUser.year || '');
         setMajor(currentUser.major || '');
         setBio(currentUser.bio || '');
+
         setImage(currentUser.image || null) 
+
       } else {
         console.log('User not found');
         // Handle case where the user is not found (e.g., show an error message)
@@ -129,32 +135,28 @@ const Profile = ({ navigation, route }) => {
         style={styles.editButton}
         onPress={() => navigation.navigate('EditProfile')}>
           <Text style={styles.linkText}>Edit</Text>
+
+
         </TouchableOpacity>
       </View>
-      
       <View style={styles.circle} onTouchEnd={pickImage}>
         <Image
-        source={image === null ? require('./assets/freddy.jpg') : { uri: image }}
-        style={styles.image}
-        />  
+          source={image === null ? require('./assets/freddy.jpg') : { uri: image }}
+          style={styles.image}
+        /> 
       </View>
-      <Text style={styles.profileText}>{name}</Text>
-      <Text style={styles.bioText}>Year: {year}{'\n'}</Text>
-      <Text style={styles.bioText}>Major: {major}{'\n'}</Text>
-      <Text style={styles.bioText}>{bio}{'\n'}</Text>
-      
-      <View style={styles.bar}>
-      </View>
-      <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('AddItem')}>
-        <Button title="Add a listing!"/>
-      </TouchableOpacity>
+        <Text style={styles.profileText}>{name}</Text>
+        <Text style={styles.bioText}>Year: {year}{'\n'}</Text>
+        <Text style={styles.bioText}>Major: {major}{'\n'}</Text>
 
+        <View style={styles.bar}>
+
+        </View>
         <Text
-        style={globalStyles.linkText}
-        onPress={() => navigation.navigate('Login')}
-        >Back to login</Text>
+      style={globalStyles.linkText}
+      onPress={() => navigation.navigate('Login')}
+      >Back to login</Text>
 
-        
     </View>
   );
 };
@@ -177,6 +179,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     width: '100%'
   },
+
   button: {
     width: '80%',
     backgroundColor: '#97c4e1',
@@ -185,6 +188,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: 10,
   },
+
   circle: {
     width: 130,
     height: 130,
@@ -221,9 +225,12 @@ const styles = StyleSheet.create({
   editButton: {
     padding: 10,
   },
+
   listingsContainer: {
     marginTop: 1,
   },
 });
 
-export default Profile;
+});
+
+export default ProfileScreen;

@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
+
 import { StyleSheet, View, TextInput, Text, TouchableOpacity, StatusBar, Image, Button, Alert } from 'react-native';
 import { globalStyles } from './styles';
-import AsyncStorage from '@react-native-async-storage/async-storage'
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+
 
 const LoginScreen = ({ navigation, route }) => {
   const [email, setEmail] = useState('');
@@ -52,28 +55,36 @@ const LoginScreen = ({ navigation, route }) => {
           // Save the logged-in user's email
           await AsyncStorage.setItem('loggedInUserEmail', email);
           // Navigate to another screen after successful login
-          navigation.navigate('Profile');
+
+          navigation.navigate('HomeWithNavBar');
         } else {
           console.log('Invalid email or password');
-          Alert.alert('Error', 'Invalid email or password');
+          alert('Invalid email or password')
+
           // Handle invalid email or password (e.g., show an error message)
         }
       } else {
         console.log('No stored users found');
+
         Alert.alert('Error', 'No stored users found');
+
         // Handle case where no users are stored
       }
     } catch (error) {
       console.error('Error logging in:', error);
       // Handle other errors (e.g., show an error message)
     }
+
   };
   
   const navigateToForgotPassword = () => {
     // Navigate to the Forgot Password screen here
     console.log('Navigate to Forgot Password');
     navigation.navigate('ForgotPassword');
+
   };
+  
+  
 
   const navigateToSignUp = () => {
     // Navigate to the Sign Up screen here
@@ -110,6 +121,7 @@ const LoginScreen = ({ navigation, route }) => {
       <TouchableOpacity style={styles.signUpButton} onPress={navigateToSignUp}>
         <Text style={styles.signUpButtonText}>Sign Up</Text>
       </TouchableOpacity>
+
       <TouchableOpacity style={styles.forgotPasswordButton} onPress={navigateToForgotPassword}>
         <Text style={styles.signUpButtonText}>Forgot Your Password?</Text>
       </TouchableOpacity>
@@ -120,6 +132,7 @@ const LoginScreen = ({ navigation, route }) => {
       <TouchableOpacity style={styles.devButton1} onPress={clearAsyncStorage}>
         <Text style={styles.buttonText}>Clear Async Storage</Text>
       </TouchableOpacity>
+
     </View>
   );
 };

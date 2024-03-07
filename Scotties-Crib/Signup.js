@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, TextInput, Text, TouchableOpacity, StatusBar, Image, Alert } from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage'
+
+import { StyleSheet, View, TextInput, Text, TouchableOpacity, StatusBar, Image, ScrollView, KeyboardAvoidingView, Platform, Alert} from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 
 
 const SignupScreen = ({ navigation, route }) => {
@@ -12,14 +14,18 @@ const SignupScreen = ({ navigation, route }) => {
       // Simulate basic email validation
       if (email.trim() === '' || !email.includes('@')) {
         console.log('Invalid email format');
+
         Alert.alert('Error', 'Invalid email format. Please try again following the format: test@test.com');
+
         return;
       }
   
       // Check if password is empty
       if (password.trim() === '') {
         console.log('Password cannot be empty');
+
         Alert.alert('Error', 'Password cannot be empty');
+
         return;
       }
 
@@ -36,6 +42,7 @@ const SignupScreen = ({ navigation, route }) => {
         major: '',
         bio: '',
         image: null,
+
        };
       const updatedUsers = [...existingUsers, newUser];
 
@@ -60,6 +67,7 @@ const SignupScreen = ({ navigation, route }) => {
 
 
   return (
+
     <View style={styles.container}>
       <StatusBar backgroundColor="#0b2138" barStyle="light-content" />
       <Text style={styles.welcomeText}>Sign Up</Text>
@@ -89,15 +97,28 @@ const SignupScreen = ({ navigation, route }) => {
         <Text style={styles.loginButtonText}>Back to Login</Text>
       </TouchableOpacity>
     </View>
+
   );
 };
 
 const styles = StyleSheet.create({
+  kavContainer: {
+    flex: 1,
+    backgroundColor: '#0b2138',
+  },
   container: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#0b2138',
+  },
+  innerContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 100,
+  },
+  scrollView: {
+    flexGrow: 1,
   },
   logo: {
     marginBottom: 20,

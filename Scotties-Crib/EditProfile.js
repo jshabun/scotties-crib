@@ -2,13 +2,16 @@ import React, {useState, useEffect} from 'react'
 import { View, Text, StyleSheet, TextInput, Button} from "react-native";
 import { globalStyles } from "./styles";
 import { TouchableOpacity } from 'react-native-gesture-handler';
+
 import AsyncStorage from '@react-native-async-storage/async-storage'
+
 
 const EditProfile = ({navigation}) => {
   const [name, setName] = useState('');
   const [year, setYear] = useState('');
   const [major, setMajor] = useState('');
   const [bio, setBio] = useState('');
+
 
 
 
@@ -43,6 +46,7 @@ const EditProfile = ({navigation}) => {
 
     loadProfileData();
   }, []); // Empty dependency array to run the effect only once on mount
+
   
   const saveProfile = async () => {
     try {
