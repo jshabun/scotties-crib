@@ -3,57 +3,81 @@ import { View, TextInput, Text, TouchableOpacity, StyleSheet, Image, StatusBar }
 import { globalStyles } from './styles';
 import updatedProfileData from './EditProfile'
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useFocusEffect } from '@react-navigation/native';
 
 
 
 const Profile = ({ navigation, route }) => {
-  const [updatedProfileData, setUpdatedProfileData] = useState({
-    name: 'Initial',
-    year: 'Initial',
-    major: 'Initial'
-  });
+  const [name, setName] = useState('');
+  const [year, setYear] = useState('');
+  const [major, setMajor] = useState('');
+  const [bio, setBio] = useState('');
+  // const [updatedProfileData, setUpdatedProfileData] = useState({
+  //   name: '',
+  //   year: '',
+  //   major: ''
+  // });
 
   useEffect(() => {
-    // Load profile data when component mounts
-    loadProfileData();
-  }, []);
+    const unsubscribe = navigation.addListener('focus', () => {
+      loadProfileData();
+    });
+  
+    return unsubscribe;
+  }, [navigation]);
 
-  useEffect(() => {
-    // Save profile data whenever it changes
-    saveProfileData();
-  }, [updatedProfileData]); // Save whenever updatedProfileData changes
+  // useEffect(() => {
+  //   // Save profile data whenever it changes
+  //   saveProfileData();
+  // }, [updatedProfileData]); // Save whenever updatedProfileData changes
 
-  useEffect(() => {
-    if (route.params && route.params.updatedProfileData) {
-      setUpdatedProfileData(route.params.updatedProfileData);
-    }
-  }, [route.params]);
+  // useEffect(() => {
+  //   if (route.params && route.params.updatedProfileData) {
+  //     setUpdatedProfileData(route.params.updatedProfileData);
+  //   }
+  // }, [route.params]);
 
   const loadProfileData = async () => {
     try {
-      const savedProfileData = await AsyncStorage.getItem('profileData');
-      if (savedProfileData) {
-        setUpdatedProfileData(JSON.parse(savedProfileData));
+      // Retrieve the currently logged-in user's email from AsyncStorage
+      const loggedInUserEmail = await AsyncStorage.getItem('loggedInUserEmail');
+      console.log('loading data')
+      // Retrieve the list of users from AsyncStorage
+      const usersJson = await AsyncStorage.getItem('users');
+      const users = usersJson ? JSON.parse(usersJson) : [];
+  
+      // Find the user with the matching email
+      const currentUser = users.find(user => user.email === loggedInUserEmail);
+  
+      if (currentUser) {
+        // Set profile data based on the current user's information
+        setName(currentUser.name || 'Edit your profile!');
+        setYear(currentUser.year || '');
+        setMajor(currentUser.major || '');
+        setBio(currentUser.bio || '');
+      } else {
+        console.log('User not found');
+        // Handle case where the user is not found (e.g., show an error message)
       }
     } catch (error) {
       console.error('Error loading profile data:', error);
     }
   };
 
-  const saveProfileData = async () => {
-    try {
-      await AsyncStorage.setItem('profileData', JSON.stringify(updatedProfileData));
-    } catch (error) {
-      console.error('Error saving profile data:', error);
-    }
-  };
+  // const saveProfileData = async () => {
+  //   try {
+  //     await AsyncStorage.setItem('profileData', JSON.stringify(updatedProfileData));
+  //   } catch (error) {
+  //     console.error('Error saving profile data:', error);
+  //   }
+  // };
 
   return (
     <View style={styles.container}>
       <View style={styles.bar}>
         <TouchableOpacity
         style={styles.editButton}
-        onPress={() => navigation.navigate('EditProfile', { currentProfileData: updatedProfileData })}>
+        onPress={() => navigation.navigate('EditProfile')}>
           <Text style={styles.linkText}>Edit</Text>
 
         </TouchableOpacity>
@@ -65,9 +89,9 @@ const Profile = ({ navigation, route }) => {
           />
         
         </View>
-        <Text style={styles.profileText}>{updatedProfileData.name}</Text>
-        <Text style={styles.bioText}>Year: {updatedProfileData.year}{'\n'}</Text>
-        <Text style={styles.bioText}>Major: {updatedProfileData.major}{'\n'}</Text>
+        <Text style={styles.profileText}>{name}</Text>
+        <Text style={styles.bioText}>Year: {year}{'\n'}</Text>
+        <Text style={styles.bioText}>Major: {major}{'\n'}</Text>
 
         <View style={styles.bar}>
 

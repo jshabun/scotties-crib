@@ -1,13 +1,52 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, TextInput, Text, TouchableOpacity, StatusBar, Image } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 
 const SignupScreen = ({ navigation, route }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSignup = () => {
-    // Implement login functionality here
-    console.log('Signup pressed');
+  const handleSignup = async () => {
+    try {
+      // Simulate basic email validation
+      if (email.trim() === '' || !email.includes('@')) {
+        console.log('Invalid email format');
+        return;
+      }
+  
+      // Check if password is empty
+      if (password.trim() === '') {
+        console.log('Password cannot be empty');
+        return;
+      }
+
+      // Retrieve existing users from AsyncStorage
+      const existingUsersJson = await AsyncStorage.getItem('users');
+      const existingUsers = existingUsersJson ? JSON.parse(existingUsersJson) : [];
+
+      // Add the new user to the existing users array
+      const newUser = { 
+        email, 
+        password,
+        name: '',
+        year: '',
+        major: '',
+        bio: '',
+       };
+      const updatedUsers = [...existingUsers, newUser];
+
+      // Save updated users array back to AsyncStorage
+      await AsyncStorage.setItem('users', JSON.stringify(updatedUsers));
+      await AsyncStorage.setItem('loggedInUserEmail', email);
+      console.log('Signup successful');
+
+      // Navigate to another screen after successful signup
+      navigation.navigate('Profile');
+    } catch (error) {
+      console.error('Error signing up:', error);
+      // Handle other errors (e.g., show an error message)
+    }
   };
 
   const navigateToLogin = () => {
