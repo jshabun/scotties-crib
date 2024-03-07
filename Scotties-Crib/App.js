@@ -6,13 +6,10 @@ import { createStackNavigator } from '@react-navigation/stack';
 import LoginScreen from './Login';
 import SignupScreen from './Signup';
 import { globalStyles } from './styles';
-<<<<<<< HEAD
 import ForgotPassword from './ForgotPassword';
 import ResetPassword from './ResetPassword';
 
-=======
 import Profile from './Profile'
->>>>>>> josh/login-page
 
 const Stack = createStackNavigator();
 
@@ -34,7 +31,6 @@ export default function App() {
               headerShown: false,
             }}
           />
-<<<<<<< HEAD
           <Stack.Screen
             name="ForgotPassword"
             component={ForgotPassword}
@@ -49,11 +45,9 @@ export default function App() {
               headerShown: false,
             }}
           />
-=======
 
 
         <Stack.Screen name="Profile" component={Profile} />
->>>>>>> josh/login-page
       </Stack.Navigator>
     </NavigationContainer>
   );
