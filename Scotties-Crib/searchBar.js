@@ -35,7 +35,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#f0f0f0',
     borderRadius: 15,
     paddingHorizontal: 16,
-    marginTop: 20,
+    marginTop: 50,
+    
   },
   searchIconContainer: {
     marginRight: 8,
