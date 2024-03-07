@@ -2,13 +2,50 @@ import React, {useState, useEffect} from 'react'
 import { View, Text, StyleSheet, TextInput, Button} from "react-native";
 import { globalStyles } from "./styles";
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+
+import AsyncStorage from '@react-native-async-storage/async-storage'
+
 
 const EditProfile = ({navigation}) => {
   const [name, setName] = useState('');
   const [year, setYear] = useState('');
   const [major, setMajor] = useState('');
   const [bio, setBio] = useState('');
+
+
+
+
+
+  useEffect(() => {
+    const loadProfileData = async () => {
+      try {
+        // Retrieve the currently logged-in user's email from AsyncStorage
+        const loggedInUserEmail = await AsyncStorage.getItem('loggedInUserEmail');
+        
+        // Retrieve the list of users from AsyncStorage
+        const usersJson = await AsyncStorage.getItem('users');
+        const users = usersJson ? JSON.parse(usersJson) : [];
+  
+        // Find the user with the matching email
+        const currentUser = users.find(user => user.email === loggedInUserEmail);
+  
+        if (currentUser) {
+          // Set profile data based on the current user's information
+          setName(currentUser.name || '');
+          setYear(currentUser.year || '');
+          setMajor(currentUser.major || '');
+          setBio(currentUser.bio || '');
+        } else {
+          console.log('User not found');
+          // Handle case where the user is not found (e.g., show an error message)
+        }
+      } catch (error) {
+        console.error('Error loading profile data:', error);
+      }
+    };
+
+    loadProfileData();
+  }, []); // Empty dependency array to run the effect only once on mount
 
   
   const saveProfile = async () => {

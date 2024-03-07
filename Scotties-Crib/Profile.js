@@ -1,13 +1,18 @@
 import React, {useState, useEffect} from 'react';
-import { View, TextInput, Text, TouchableOpacity, StyleSheet, Image, StatusBar } from 'react-native';
+
+import { View, TextInput, Text, StyleSheet, Image, StatusBar, Button } from 'react-native';
+import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 import { globalStyles } from './styles';
 import updatedProfileData from './EditProfile'
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage'
+
 import { useFocusEffect } from '@react-navigation/native';
 import * as ImagePicker from 'expo-image-picker';
 
 
+
 const ProfileScreen = ({ navigation, route }) => {
+
   const [name, setName] = useState('');
   const [year, setYear] = useState('');
   const [major, setMajor] = useState('');
@@ -27,6 +32,7 @@ const ProfileScreen = ({ navigation, route }) => {
     return unsubscribe;
   }, [navigation]);
 
+
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
@@ -42,6 +48,7 @@ const ProfileScreen = ({ navigation, route }) => {
       saveImageToStorage(result.assets[0].uri);
     }
   };
+
 
   const saveImageToStorage = async (uri) => {
     try {
@@ -101,7 +108,9 @@ const ProfileScreen = ({ navigation, route }) => {
         setYear(currentUser.year || '');
         setMajor(currentUser.major || '');
         setBio(currentUser.bio || '');
-        setImage(currentUser.image || null);
+
+        setImage(currentUser.image || null) 
+
       } else {
         console.log('User not found');
         // Handle case where the user is not found (e.g., show an error message)
@@ -127,6 +136,7 @@ const ProfileScreen = ({ navigation, route }) => {
         onPress={() => navigation.navigate('EditProfile')}>
           <Text style={styles.linkText}>Edit</Text>
 
+
         </TouchableOpacity>
       </View>
       <View style={styles.circle} onTouchEnd={pickImage}>
@@ -146,6 +156,7 @@ const ProfileScreen = ({ navigation, route }) => {
       style={globalStyles.linkText}
       onPress={() => navigation.navigate('Login')}
       >Back to login</Text>
+
     </View>
   );
 };
@@ -168,6 +179,16 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     width: '100%'
   },
+
+  button: {
+    width: '80%',
+    backgroundColor: '#97c4e1',
+    padding: 15,
+    borderRadius: 5,
+    alignItems: 'center',
+    marginTop: 10,
+  },
+
   circle: {
     width: 130,
     height: 130,
@@ -204,6 +225,12 @@ const styles = StyleSheet.create({
   editButton: {
     padding: 10,
   },
+
+  listingsContainer: {
+    marginTop: 1,
+  },
+});
+
 });
 
 export default ProfileScreen;

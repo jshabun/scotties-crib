@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, TextInput, Text, TouchableOpacity, StatusBar, Image, ScrollView, KeyboardAvoidingView, Platform} from 'react-native';
+
+import { StyleSheet, View, TextInput, Text, TouchableOpacity, StatusBar, Image, ScrollView, KeyboardAvoidingView, Platform, Alert} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+
 
 
 const SignupScreen = ({ navigation, route }) => {
@@ -12,12 +14,18 @@ const SignupScreen = ({ navigation, route }) => {
       // Simulate basic email validation
       if (email.trim() === '' || !email.includes('@')) {
         console.log('Invalid email format');
+
+        Alert.alert('Error', 'Invalid email format. Please try again following the format: test@test.com');
+
         return;
       }
   
       // Check if password is empty
       if (password.trim() === '') {
         console.log('Password cannot be empty');
+
+        Alert.alert('Error', 'Password cannot be empty');
+
         return;
       }
 
@@ -33,6 +41,8 @@ const SignupScreen = ({ navigation, route }) => {
         year: '',
         major: '',
         bio: '',
+        image: null,
+
        };
       const updatedUsers = [...existingUsers, newUser];
 
@@ -57,46 +67,37 @@ const SignupScreen = ({ navigation, route }) => {
 
 
   return (
-    <KeyboardAvoidingView
-      style={styles.kavContainer}
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-      keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : 20}
-    >
-      <ScrollView contentContainerStyle={styles.scrollView}>
-        <View style={styles.innerContainer}>
 
+    <View style={styles.container}>
+      <StatusBar backgroundColor="#0b2138" barStyle="light-content" />
+      <Text style={styles.welcomeText}>Sign Up</Text>
+      <Image source={require('./assets/icon.png')} style={styles.logo} />
+      <TextInput
+        style={styles.input}
+        placeholder="Email"
+        placeholderTextColor="#97c4e1"
+        onChangeText={text => setEmail(text)}
+        value={email}
+        keyboardType="email-address"
+        autoCapitalize='none'
+      />
+      <TextInput
+        style={styles.input}
+        placeholder="Password"
+        placeholderTextColor="#97c4e1"
+        onChangeText={text => setPassword(text)}
+        value={password}
+        secureTextEntry={true}
+        autoCapitalize='none'
+      />
+      <TouchableOpacity style={styles.button} onPress={handleSignup}>
+        <Text style={styles.buttonText}>Sign Up</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.loginButton} onPress={navigateToLogin}>
+        <Text style={styles.loginButtonText}>Back to Login</Text>
+      </TouchableOpacity>
+    </View>
 
-    
-          <StatusBar backgroundColor="#0b2138" barStyle="light-content" />
-          <Text style={styles.welcomeText}>Sign Up</Text>
-          <Image source={require('./assets/icon.png')} style={styles.logo} />
-          <TextInput
-            style={styles.input}
-            placeholder="Email"
-            placeholderTextColor="#97c4e1"
-            onChangeText={text => setEmail(text)}
-            value={email}
-            keyboardType="email-address"
-            />
-          <TextInput
-            style={styles.input}
-            placeholder="Password"
-            placeholderTextColor="#97c4e1"
-            onChangeText={text => setPassword(text)}
-            value={password}
-            secureTextEntry={true}
-            />
-          <TouchableOpacity style={styles.button} onPress={handleSignup}>
-            <Text style={styles.buttonText}>Sign Up</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.loginButton} onPress={navigateToLogin}>
-            <Text style={styles.loginButtonText}>Back to Login</Text>
-          </TouchableOpacity>
-      
-        </View>
-      </ScrollView>
-
-    </KeyboardAvoidingView>
   );
 };
 
