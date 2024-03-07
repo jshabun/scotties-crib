@@ -3,6 +3,7 @@ import { StyleSheet, View, TextInput, Text, TouchableOpacity, StatusBar, Image, 
 import { globalStyles } from './styles';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+
 const LoginScreen = ({ navigation, route }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');

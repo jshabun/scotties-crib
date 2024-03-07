@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, TextInput, Text, TouchableOpacity, StatusBar, Image } from 'react-native';
+import { StyleSheet, View, TextInput, Text, TouchableOpacity, StatusBar, Image, ScrollView, KeyboardAvoidingView, Platform} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
@@ -57,42 +57,67 @@ const SignupScreen = ({ navigation, route }) => {
 
 
   return (
-    <View style={styles.container}>
-      <StatusBar backgroundColor="#0b2138" barStyle="light-content" />
-      <Text style={styles.welcomeText}>Sign Up</Text>
-      <Image source={require('./assets/icon.png')} style={styles.logo} />
-      <TextInput
-        style={styles.input}
-        placeholder="Email"
-        placeholderTextColor="#97c4e1"
-        onChangeText={text => setEmail(text)}
-        value={email}
-        keyboardType="email-address"
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Password"
-        placeholderTextColor="#97c4e1"
-        onChangeText={text => setPassword(text)}
-        value={password}
-        secureTextEntry={true}
-      />
-      <TouchableOpacity style={styles.button} onPress={handleSignup}>
-        <Text style={styles.buttonText}>Sign Up</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.loginButton} onPress={navigateToLogin}>
-        <Text style={styles.loginButtonText}>Back to Login</Text>
-      </TouchableOpacity>
-    </View>
+    <KeyboardAvoidingView
+      style={styles.kavContainer}
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : 20}
+    >
+      <ScrollView contentContainerStyle={styles.scrollView}>
+        <View style={styles.innerContainer}>
+
+
+    
+          <StatusBar backgroundColor="#0b2138" barStyle="light-content" />
+          <Text style={styles.welcomeText}>Sign Up</Text>
+          <Image source={require('./assets/icon.png')} style={styles.logo} />
+          <TextInput
+            style={styles.input}
+            placeholder="Email"
+            placeholderTextColor="#97c4e1"
+            onChangeText={text => setEmail(text)}
+            value={email}
+            keyboardType="email-address"
+            />
+          <TextInput
+            style={styles.input}
+            placeholder="Password"
+            placeholderTextColor="#97c4e1"
+            onChangeText={text => setPassword(text)}
+            value={password}
+            secureTextEntry={true}
+            />
+          <TouchableOpacity style={styles.button} onPress={handleSignup}>
+            <Text style={styles.buttonText}>Sign Up</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.loginButton} onPress={navigateToLogin}>
+            <Text style={styles.loginButtonText}>Back to Login</Text>
+          </TouchableOpacity>
+      
+        </View>
+      </ScrollView>
+
+    </KeyboardAvoidingView>
   );
 };
 
 const styles = StyleSheet.create({
+  kavContainer: {
+    flex: 1,
+    backgroundColor: '#0b2138',
+  },
   container: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#0b2138',
+  },
+  innerContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 100,
+  },
+  scrollView: {
+    flexGrow: 1,
   },
   logo: {
     marginBottom: 20,

@@ -12,6 +12,7 @@ const ProfileScreen = ({ navigation, route }) => {
   const [year, setYear] = useState('');
   const [major, setMajor] = useState('');
   const [bio, setBio] = useState('');
+  const [image, setImage] = useState(null);
   // const [updatedProfileData, setUpdatedProfileData] = useState({
   //   name: '',
   //   year: '',
@@ -25,6 +26,51 @@ const ProfileScreen = ({ navigation, route }) => {
   
     return unsubscribe;
   }, [navigation]);
+
+  const pickImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
+
+    console.log("Image picker result:", result);
+
+    if (!result.cancelled) {
+      setImage(result.assets[0].uri);
+      saveImageToStorage(result.assets[0].uri);
+    }
+  };
+
+  const saveImageToStorage = async (uri) => {
+    try {
+      console.log(uri)
+      // Get the email of the currently logged-in user
+      const loggedInUserEmail = await AsyncStorage.getItem('loggedInUserEmail');
+      console.log('Logged-in user email:', loggedInUserEmail);
+  
+      // Retrieve the list of users from AsyncStorage
+      const usersJson = await AsyncStorage.getItem('users');
+      console.log('Users from AsyncStorage:', usersJson);
+      let users = usersJson ? JSON.parse(usersJson) : [];
+  
+      // Update the image field of the corresponding user
+      const updatedUsers = users.map(user => {
+        if (user.email === loggedInUserEmail) {
+          console.log('Updating user with email:', loggedInUserEmail);
+          return { ...user, image: uri }; // Add the image property to the user object
+        }
+        return user;
+      });
+  
+      // Save the updated users array back to AsyncStorage
+      await AsyncStorage.setItem('users', JSON.stringify(updatedUsers));
+      console.log('Users after update:', updatedUsers);
+    } catch (error) {
+      console.error('Error saving image to AsyncStorage:', error);
+    }
+  };
 
   // useEffect(() => {
   //   // Save profile data whenever it changes
@@ -55,6 +101,7 @@ const ProfileScreen = ({ navigation, route }) => {
         setYear(currentUser.year || '');
         setMajor(currentUser.major || '');
         setBio(currentUser.bio || '');
+        setImage(currentUser.image || null);
       } else {
         console.log('User not found');
         // Handle case where the user is not found (e.g., show an error message)
@@ -82,13 +129,12 @@ const ProfileScreen = ({ navigation, route }) => {
 
         </TouchableOpacity>
       </View>
-      <View style={styles.circle}>
+      <View style={styles.circle} onTouchEnd={pickImage}>
         <Image
-          source={require('./assets/freddy.jpg')}
+          source={image === null ? require('./assets/freddy.jpg') : { uri: image }}
           style={styles.image}
-          />
-        
-        </View>
+        /> 
+      </View>
         <Text style={styles.profileText}>{name}</Text>
         <Text style={styles.bioText}>Year: {year}{'\n'}</Text>
         <Text style={styles.bioText}>Major: {major}{'\n'}</Text>
