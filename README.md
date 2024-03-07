@@ -29,7 +29,9 @@ Luke Nguyen lnguy353@ucr.edu
 
 ## Details
 ### Why React Native?
+
 We chose React Native as it allowed us to quickly develop an application for multiple devices and multiple operating systems such as iOS and Android. React Native allows us to compile these applications without needing to program and develop them in the respective languages for each operating system. Since some of us have experience with web development this project would prove to be similar due to its major use of JavaScript. 
 
 ### Why Expo?
 Expo is a toolkit and framework that was of great use to us. Since all of us are students, each person has a different setup for development whether it's a different phone or a different computer. Expo allowed us to run, compile, and test the application on all of these devices for much quicker development and portability. Though we did end up compiling the application for iOS use, the development process was greatly increased with the use of Expo CLI and Expo Go. 
+
