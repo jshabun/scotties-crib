@@ -50,7 +50,7 @@ export default function App() {
           {() => (
             <NavigationContainer independent={true}>
               <NavBar>
-                <Stack.Screen name="Home" component={HomeScreen} />
+                <Stack.Screen name="Home" options={{ headerShown: false }} component={HomeScreen} />
               </NavBar>
             </NavigationContainer>
           )}
