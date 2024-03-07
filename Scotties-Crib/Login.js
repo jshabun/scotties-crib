@@ -55,6 +55,7 @@ const LoginScreen = ({ navigation, route }) => {
           navigation.navigate('Profile');
         } else {
           console.log('Invalid email or password');
+          alert('Invalid email or password')
           // Handle invalid email or password (e.g., show an error message)
         }
       } else {
