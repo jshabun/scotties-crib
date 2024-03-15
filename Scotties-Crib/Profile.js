@@ -18,6 +18,7 @@ const ProfileScreen = ({ navigation, route }) => {
   const [major, setMajor] = useState('');
   const [bio, setBio] = useState('');
   const [image, setImage] = useState(null);
+  const [listings, setListings] = useState([]);
   // const [updatedProfileData, setUpdatedProfileData] = useState({
   //   name: '',
   //   year: '',
@@ -109,7 +110,8 @@ const ProfileScreen = ({ navigation, route }) => {
         setMajor(currentUser.major || '');
         setBio(currentUser.bio || '');
 
-        setImage(currentUser.image || null) 
+        setImage(currentUser.image || null);
+        setListings(currentUser.listings || []);
 
       } else {
         console.log('User not found');

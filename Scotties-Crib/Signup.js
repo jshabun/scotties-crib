@@ -42,6 +42,7 @@ const SignupScreen = ({ navigation, route }) => {
         major: '',
         bio: '',
         image: null,
+        listings: [],
 
        };
       const updatedUsers = [...existingUsers, newUser];
